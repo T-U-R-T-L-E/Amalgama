@@ -1,0 +1,6 @@
+{
+  "name": "Amalgama",
+  "description": "Amalgama enables you to formulate natural beauty, self-care, cleaning, and household solutions at home with simple, organic ingredients to minimize synthetic chemical exposure.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

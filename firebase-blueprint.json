@@ -1,0 +1,76 @@
+{
+  "entities": {
+    "Recipe": {
+      "title": "Recipe",
+      "description": "A formulation recipe for a homemade product.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "prepTime": { "type": "string" },
+        "difficulty": { "type": "string" },
+        "rating": { "type": "number" },
+        "isCustom": { "type": "boolean" },
+        "ingredients": {
+          "type": "array",
+          "description": "List of ingredients required for this recipe."
+        },
+        "instructions": {
+          "type": "array",
+          "description": "Step-by-step preparation and usage guide."
+        }
+      },
+      "required": ["id", "title", "category", "ingredients", "instructions"]
+    },
+    "SavedRecipe": {
+      "title": "SavedRecipe",
+      "description": "A bookmarked or saved recipe with personalized notes.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "prepTime": { "type": "string" },
+        "difficulty": { "type": "string" },
+        "rating": { "type": "number" },
+        "isCustom": { "type": "boolean" },
+        "ingredients": { "type": "array" },
+        "instructions": { "type": "array" },
+        "savedAt": { "type": "string", "description": "ISO date-time when the recipe was bookmarked." },
+        "personalNotes": { "type": "string", "description": "User notes recorded for the recipe." },
+        "collections": {
+          "type": "array",
+          "description": "Custom collections this saved recipe belongs to."
+        }
+      },
+      "required": ["id", "title", "category", "savedAt"]
+    },
+    "AuditQuantity": {
+      "title": "AuditQuantity",
+      "description": "Yearly custom batch count for financial & toxin savings auditing.",
+      "type": "object",
+      "properties": {
+        "recipeId": { "type": "string" },
+        "quantity": { "type": "number" }
+      },
+      "required": ["recipeId", "quantity"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/savedRecipes/{recipeId}": {
+      "schema": { "$ref": "#/entities/SavedRecipe" },
+      "description": "Collection of recipes saved/bookmarked by the user."
+    },
+    "/users/{userId}/customRecipes/{recipeId}": {
+      "schema": { "$ref": "#/entities/Recipe" },
+      "description": "Collection of custom formulary creations from the lab."
+    },
+    "/users/{userId}/auditQuantities/{recipeId}": {
+      "schema": { "$ref": "#/entities/AuditQuantity" },
+      "description": "Collection tracking batch quantities formulated every year for personal audits."
+    }
+  }
+}
